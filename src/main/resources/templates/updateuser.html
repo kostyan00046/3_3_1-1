@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Update user</title>
+    <style>
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+<div>
+    <form th:action="@{/saveUser}" th:object="${User}" method="post">
+        <fieldset>
+            <legend>Введите новые данные пользователя</legend>
+
+            <div>
+                <label for="id">Id пользователя: <span th:text="${User.id}"></span></label>
+                <input type="hidden" th:field="*{id}" id="id" readonly />
+            </div>
+
+            <div>
+                <label for="name">Имя</label>
+                <input type="text" th:field="*{firstName}" id="name" required />
+                <small th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}">Пожалуйста, введите правильное имя.</small>
+            </div>
+
+            <div>
+                <label for="lastName">Фамилия</label>
+                <input type="text" th:field="*{lastName}" id="lastName" required />
+                <small th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}">Пожалуйста, введите правильную фамилию.</small>
+            </div>
+
+            <div>
+                <label for="age">Возраст</label>
+                <input type="text" th:field="*{age}" id="age" required />
+                <small th:if="${#fields.hasErrors('age')}" th:errors="*{age}">Пожалуйста, введите правильный возраст.</small>
+            </div>
+
+            <br/>
+            <button type="submit">Изменить данные пользователя</button>
+        </fieldset>
+    </form>
+</div>
+</body>
+</html>
